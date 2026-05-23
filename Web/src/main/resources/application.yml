@@ -1,0 +1,38 @@
+server:
+  port: ${SERVER_PORT:8080}
+
+spring:
+  application:
+    name: smarthome
+
+  datasource:
+    url: ${SPRING_DATASOURCE_URL}
+    username: ${SPRING_DATASOURCE_USERNAME}
+    password: ${SPRING_DATASOURCE_PASSWORD}
+    driver-class-name: org.postgresql.Driver
+
+  jpa:
+    hibernate:
+      ddl-auto: none
+    show-sql: false
+
+  flyway:
+    enabled: true
+    locations: classpath:db/migration
+
+  jackson:
+    property-naming-strategy: LOWER_CAMEL_CASE
+    serialization:
+      write-dates-as-timestamps: false
+
+# MQTT (EMQX Cloud)
+mqtt:
+  broker-url: ${MQTT_BROKER_URL}
+  username: ${MQTT_USERNAME}
+  password: ${MQTT_PASSWORD}
+  client-id: smarthome-backend-${random.uuid}
+
+# JWT
+jwt:
+  secret: ${JWT_SECRET}
+  expiration: 7200
